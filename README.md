@@ -17,7 +17,6 @@ chrono-lab/
 ├── dashboards/
 │   └── gpu-llm-traces-final.json   # Grafana dashboard with span + GPU panels
 =======
-│   └── gpu-llm-traces-final.json
 ├── prometheus/
 │   └── prometheus.yml
 ├── tempo/
