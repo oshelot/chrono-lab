@@ -9,69 +9,112 @@ It’s designed as a self-contained environment for experimenting with span metr
 
 ```
 chrono-lab/
+├── app/
+│   ├── app.py
+│   ├── loadgen.py
+│   ├── run_app.sh
+│   └── run_load.sh
 ├── dashboards/
+<<<<<<< HEAD
 │   └── gpu-llm-traces-final.json   # Grafana dashboard with span + GPU panels
+=======
+│   └── gpu-llm-traces-final.json
+>>>>>>> 1d7f280 (Add inference service app (app.py, loadgen.py, run_app.sh, run_load.sh). Updates README with App instructions and tmux command)
 ├── prometheus/
-│   └── prometheus.yml                     # Prometheus scrape configuration
+│   └── prometheus.yml
 ├── tempo/
-│   └── tempo.yml                          # Tempo configuration
+│   └── tempo.yaml
 ├── otel/
-│   └── otel-collector-config.yaml         # OpenTelemetry Collector pipeline
+│   └── otel-collector.yaml
 ├── compose/
-│   └── docker-compose.yml                 # Services (Prometheus, Tempo, Grafana, OTEL, exporters)
+│   └── docker-compose.yml
 ├── docs/
 │   └── (Presentations, PDFs, diagrams)
 └── README.md
 ```
 
+> If your filenames differ, update the paths accordingly.
+
 ---
 
 ## Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/)  
-- [Docker Compose](https://docs.docker.com/compose/install/) (v2 recommended)  
-- An NVIDIA GPU + [NVIDIA DCGM exporter](https://github.com/NVIDIA/dcgm-exporter) if you want GPU metrics  
+- Docker + Docker Compose v2
+- (Optional) NVIDIA GPU if you want DCGM metrics
 
 ---
 
-## Running the Lab
-
-From the repo root:
+## Start the stack
 
 ```bash
 cd compose
 docker compose up -d
 ```
 
-This will start:
-- **Prometheus** (metrics backend)
-- **Tempo** (trace storage)
-- **Grafana** (dashboards + UI)
-- **OpenTelemetry Collector** (metrics/traces pipeline)
-- **DCGM exporter** (GPU metrics)
-- Any additional services defined in `docker-compose.yml`
+Services:
+- **Prometheus** (metrics) — http://localhost:9090
+- **Tempo** (traces) — http://localhost:3200
+- **Grafana** (dashboards) — http://localhost:3000
+- **OTel Collector** (pipelines)
+- **DCGM exporter** (GPU telemetry)
+- **Phoenix** (trace exploration UI) — http://localhost:6006
+
+
+Import the dashboard in Grafana: `dashboards/gpu-llm-traces-final.json`
 
 ---
 
-## Accessing the UI
+## Run the app + load generator
 
+<<<<<<< HEAD
 - Grafana: [http://localhost:3000]
   - Import the dashboard from `dashboards/gpu-llm-traces-final.json`  
 - Prometheus: [http://localhost:9090])  
 - Tempo: [http://localhost:3200]
 - Phoenix: [http://localhost:6006]
+=======
+From another terminal:
+
+```bash
+cd app
+./run_app.sh
+```
+
+Once running, generate load:
+
+```bash
+cd app
+./run_load.sh
+```
+
+Make sure scripts are executable:
+```bash
+chmod +x app/run_app.sh app/run_load.sh
+```
+
+---
+
+## One-liner: tmux session (3 panes)
+
+This opens 3 panes: **Compose up**, **App**, and **Load** — all visible in a tiled layout.
+
+```bash
+tmux new-session -d -s chrono-lab 'cd ~/chrono-lab/compose && docker compose up -d' \;   split-window -h 'cd ~/chrono-lab/app && ./run_app.sh' \;   split-window -v 'cd ~/chrono-lab/app && ./run_load.sh' \;   select-layout tiled \; attach
+```
+
+> If your repo lives somewhere else, replace `~/chrono-lab` with the actual path.
+>>>>>>> 1d7f280 (Add inference service app (app.py, loadgen.py, run_app.sh, run_load.sh). Updates README with App instructions and tmux command)
 
 ---
 
 ## Notes
 
+<<<<<<< HEAD
 - Update the Prometheus and Tempo config files under `prometheus/` and `tempo/` if you add new scrape targets or want to adjust retention.  
 - The `docs/` directory is for presentation material (e.g., PDFs of slides).  
+=======
+- Prometheus and Tempo configs live in `prometheus/` and `tempo/`. Adjust scrape targets and retention to taste.
+- The `docs/` directory is for presentation material (PDFs, diagrams, etc.).
+- If you later add a `requirements.txt` and virtualenv, you can wire that into `run_app.sh`; not required for this lab.
+>>>>>>> 1d7f280 (Add inference service app (app.py, loadgen.py, run_app.sh, run_load.sh). Updates README with App instructions and tmux command)
 
----
-
-## Next Steps
-
-- Expand the dashboards with more service-level metrics.  
-- Add test load generators to produce spans and GPU usage.  
-- Experiment with Phoenix links from exemplar trace IDs.
