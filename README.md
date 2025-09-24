@@ -73,13 +73,12 @@ Import the dashboard in Grafana: `dashboards/gpu-llm-traces-final.json`
 
 ## Run the app + load generator
 
-- Grafana: [http://localhost:3000]
-  - Import the dashboard from `dashboards/gpu-llm-traces-final.json`  
-- Prometheus: [http://localhost:9090])  
-- Tempo: [http://localhost:3200]
-- Phoenix: [http://localhost:6006]
 =======
 From another terminal:
+Make sure scripts are executable:
+```bash
+chmod +x app/run_app.sh app/run_load.sh
+```
 
 ```bash
 cd app
@@ -93,10 +92,7 @@ cd app
 ./run_load.sh
 ```
 
-Make sure scripts are executable:
-```bash
-chmod +x app/run_app.sh app/run_load.sh
-```
+
 
 ---
 
