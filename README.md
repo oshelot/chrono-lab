@@ -57,7 +57,7 @@ Services:
 - **Grafana** (dashboards) — http://localhost:3000
 - **OTel Collector** (pipelines)
 - **DCGM exporter** (GPU telemetry)
-- **Phoenix** (trace exploration UI) — http://localhost:6006
+- **Phoenix** (LLM trace exploration UI) — http://localhost:6006
 
 
 Import the dashboard in Grafana: `dashboards/gpu-llm-traces-final.json`
@@ -66,7 +66,6 @@ Import the dashboard in Grafana: `dashboards/gpu-llm-traces-final.json`
 
 ## Run the app + load generator
 
-<<<<<<< HEAD
 - Grafana: [http://localhost:3000]
   - Import the dashboard from `dashboards/gpu-llm-traces-final.json`  
 - Prometheus: [http://localhost:9090])  
