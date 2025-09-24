@@ -1,6 +1,6 @@
 # ChronoLab
 
-ChronoLab is a local observability lab that ties together **OpenTelemetry**, **Prometheus**, **Tempo**, and **Grafana** with GPU metrics (via NVIDIA DCGM) and LLM span metrics.  
+ChronoLab is a local observability lab that ties together **OpenTelemetry**, **Prometheus**, **Tempo**, **Pnoenix** and **Grafana** with GPU metrics (via NVIDIA DCGM) and LLM span metrics.  
 It’s designed as a self-contained environment for experimenting with span metrics, traces, and exemplar linking into Phoenix.
 
 ---
