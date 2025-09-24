@@ -10,7 +10,7 @@ It’s designed as a self-contained environment for experimenting with span metr
 ```
 chrono-lab/
 ├── dashboards/
-│   └── gpu-llm-traces-merged-fixed.json   # Grafana dashboard with span + GPU panels
+│   └── gpu-llm-traces-final.json   # Grafana dashboard with span + GPU panels
 ├── prometheus/
 │   └── prometheus.yml                     # Prometheus scrape configuration
 ├── tempo/
@@ -55,17 +55,18 @@ This will start:
 
 ## Accessing the UI
 
-- Grafana: [http://localhost:3000](http://localhost:3000)  
-  - Import the dashboard from `dashboards/gpu-llm-traces-merged-fixed.json`  
-- Prometheus: [http://localhost:9090](http://localhost:9090)  
-- Tempo: [http://localhost:3200](http://localhost:3200)  
+- Grafana: [http://localhost:3000]
+  - Import the dashboard from `dashboards/gpu-llm-traces-final.json`  
+- Prometheus: [http://localhost:9090])  
+- Tempo: [http://localhost:3200]
+- Phoenix: [http://localhost:6006]
 
 ---
 
 ## Notes
 
 - Update the Prometheus and Tempo config files under `prometheus/` and `tempo/` if you add new scrape targets or want to adjust retention.  
-- The `docs/` directory is for presentation material (e.g., PDFs of your slides).  
+- The `docs/` directory is for presentation material (e.g., PDFs of slides).  
 
 ---
 
