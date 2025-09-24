@@ -15,11 +15,9 @@ chrono-lab/
 │   ├── run_app.sh
 │   └── run_load.sh
 ├── dashboards/
-<<<<<<< HEAD
 │   └── gpu-llm-traces-final.json   # Grafana dashboard with span + GPU panels
 =======
 │   └── gpu-llm-traces-final.json
->>>>>>> 1d7f280 (Add inference service app (app.py, loadgen.py, run_app.sh, run_load.sh). Updates README with App instructions and tmux command)
 ├── prometheus/
 │   └── prometheus.yml
 ├── tempo/
