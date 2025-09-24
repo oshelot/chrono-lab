@@ -103,18 +103,15 @@ tmux new-session -d -s chrono-lab 'cd ~/chrono-lab/compose && docker compose up 
 ```
 
 > If your repo lives somewhere else, replace `~/chrono-lab` with the actual path.
->>>>>>> 1d7f280 (Add inference service app (app.py, loadgen.py, run_app.sh, run_load.sh). Updates README with App instructions and tmux command)
 
 ---
 
 ## Notes
 
-<<<<<<< HEAD
 - Update the Prometheus and Tempo config files under `prometheus/` and `tempo/` if you add new scrape targets or want to adjust retention.  
 - The `docs/` directory is for presentation material (e.g., PDFs of slides).  
 =======
 - Prometheus and Tempo configs live in `prometheus/` and `tempo/`. Adjust scrape targets and retention to taste.
 - The `docs/` directory is for presentation material (PDFs, diagrams, etc.).
 - If you later add a `requirements.txt` and virtualenv, you can wire that into `run_app.sh`; not required for this lab.
->>>>>>> 1d7f280 (Add inference service app (app.py, loadgen.py, run_app.sh, run_load.sh). Updates README with App instructions and tmux command)
 
