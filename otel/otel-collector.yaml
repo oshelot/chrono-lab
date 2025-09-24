@@ -1,0 +1,76 @@
+receivers:
+  otlp:
+    protocols:
+      grpc: { endpoint: 0.0.0.0:4317 }
+      http: { endpoint: 0.0.0.0:4318 }
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'dcgm'
+          static_configs:
+            - targets: ['dcgm-exporter:9400']
+          metric_relabel_configs:
+            - source_labels: [__name__]
+              regex: ^up$
+              action: drop
+
+        - job_name: 'otel-collector'
+          honor_labels: true
+          scrape_interval: 10s
+          static_configs:
+            - targets: ['otel-collector:8889']   # adjust host if needed  
+
+processors:
+  filter:
+    metrics:
+      exclude:
+        match_type: regexp
+        metric_names: ['^up$']
+  batch: {}
+
+exporters:
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    enable_open_metrics: true   # ← required for exemplars to be exposed
+  otlp/phoenix:
+    endpoint: phoenix:4317
+    tls: { insecure: true }
+  otlp/tempo:
+    endpoint: tempo:4317
+    tls: { insecure: true }
+
+connectors:
+  spanmetrics:
+    dimensions:
+      - name: llm.model_name          # gpt-4, llama3, etc.
+      - name: llm.request.type        # completion, embedding, chat
+      - name: llm.response.status     # success, error
+      - name: llm.request.tokens      # prompt tokens
+      - name: llm.response.tokens     # output tokens
+      - name: llm.total_tokens        # total tokens per request
+    histogram:
+      explicit:
+        buckets: [1ms, 5ms, 10ms, 25ms, 50ms, 100ms, 250ms, 500ms, 1s, 2.5s, 5s, 10s]
+    exemplars:
+      enabled: true
+
+service:
+  pipelines:
+    # DCGM metrics -> Prom exporter
+    metrics:
+      receivers: [prometheus]
+      processors: [filter, batch]
+      exporters: [prometheus]
+
+    # Traces -> Tempo & Phoenix AND -> spanmetrics connector
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/tempo, otlp/phoenix, spanmetrics]
+
+    # Spanmetrics (from connector) -> Prom exporter
+    metrics/spanmetrics:
+      receivers: [spanmetrics]
+      processors: [batch]
+      exporters: [prometheus]
+
