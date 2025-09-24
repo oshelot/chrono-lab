@@ -39,9 +39,18 @@ chrono-lab/
 
 - Docker + Docker Compose v2
 - (Optional) NVIDIA GPU if you want DCGM metrics
+- (Optional) Ollama - If you want to generate load against a **local LLM**, you can install [Ollama](https://ollama.com/). Your `app/` and `loadgen.py` can then be configured to send traffic through a local Ollama instead of a remote API (as done here). Phoenix will ingest those traces the same way.
 
 ---
 
+## Phoenix & LLM Observability
+
+This lab uses **Phoenix** as the deep-dive UI for LLM observability.
+
+- We currently focus on **Prompt/Response traces**: each LLM call is captured as a span with input/output details, visible in Phoenix.
+- Grafana panels include **exemplar links** (trace IDs) that let you jump directly into Phoenix for detailed trace inspection.
+- Phoenix also supports **LLM evaluation metrics** (toxicity, helpfulness, correctness) and **model comparison/regression testing**, but those are not enabled in this lab.
+  
 ## Start the stack
 
 ```bash
