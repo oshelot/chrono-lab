@@ -76,6 +76,7 @@ Import the dashboard in Grafana: `dashboards/gpu-llm-traces-final.json`
 =======
 
 From another terminal:
+
 Make sure scripts are executable:
 ```bash
 chmod +x app/run_app.sh app/run_load.sh
