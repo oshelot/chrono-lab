@@ -39,7 +39,7 @@ chrono-lab/
 - Docker + Docker Compose v2
 - Add Grafana data sources for Prometheus, Tempo, and Infinity (connects to Prometheus)
 - (Optional) NVIDIA GPU if you want DCGM metrics
-- (Optional) Ollama - If you want to generate load against a **local LLM**, you can install [Ollama](https://ollama.com/). Your `app/` and `loadgen.py` can then be configured to send traffic through a local Ollama instead of a remote API (as done here). Phoenix will ingest those traces the same way.
+- (Optional) Ollama - If you want to generate load against a **local LLM**, you can install [Ollama](https://ollama.com/). Your `app/` and `loadgen.py` can then be configured to send traffic through a local Ollama(as done here) instead of a remote API . Phoenix will ingest those traces the same way.
 
 ---
 
