@@ -10,8 +10,8 @@ It’s designed as a self-contained environment for experimenting with span metr
 ```
 chrono-lab/
 ├── app/
-│   ├── app.py
-│   ├── loadgen.py
+│   ├── app.py      # Inference Service App
+│   ├── loadgen.py     # App load generator
 │   ├── run_app.sh
 │   └── run_load.sh
 ├── dashboards/
